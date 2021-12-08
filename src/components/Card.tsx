@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {FC} from 'react';
 
+export enum CardVariant { // Перечисление
+	outlined = 'outlined',
+	primary  = 'primary'
+}
 interface CardProps {
 	width?: string;
 	height?: string;
-	children?: React.ReactChild | React.ReactNode
+	//children?: React.ReactChild | React.ReactNode
+	variant: CardVariant;
 }
 
-const Card = ({ width, height, children }: CardProps) => {
+const Card: FC<CardProps> =
+	({
+		width, 
+		height,
+		variant,
+		children
+	}) => {
 	return (
-		<div style={{width, height, border: '1px solid gray'}}>
+		<div style={{width, height, 
+			border: variant === CardVariant.outlined ? '1px solid gray' : 'none',
+			background: variant === CardVariant.primary ? 'lightgray' : ''
+		}}>
 			{children}
 		</div>
 	);
